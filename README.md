@@ -2,7 +2,7 @@
 
 ## UML diagram
 ```mermaid
-tringclassDiagram
+classDiagram
 class Date {
     # string dateString
     # int month
