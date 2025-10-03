@@ -3,15 +3,16 @@
 
 #include "address.h"
 #include "date.h"
+#include <string>
 
 class Student {
         protected:
                 std::string studentString;
 		std::string firstName;
 		std::string lastName;
-		// put address here
-		// put dob here
-		// put expected grad date here
+		Address* address;
+		Date* dob;
+		Date* expectedGrad;
 		int creditHours;
 
         public:
@@ -21,7 +22,8 @@ class Student {
                 void printStudent();
 		std::string getLastName();
 		std::string getFirstName();
+		std::string getLastFirst();
 		int getCreditHours();
-} // end class def
+}; // end class def
 
 #endif
