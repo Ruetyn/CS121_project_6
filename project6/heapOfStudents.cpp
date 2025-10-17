@@ -10,6 +10,7 @@ void printStudents(const std::vector<Student*>& students);
 void findStudent(const std::vector<Student*>& students);
 void deleteStudents(std::vector<Student*>& students);
 std::string menu();
+std::string sortMenu();
 
 int main(){
 	std::vector<Student*> students;
@@ -27,8 +28,22 @@ int main(){
 			printStudents(students);
 		} else if (choice == "3") {
 			findStudent(students);
+		} else if (choice == "4") {
+			choice = sortMenu();
+			if (choice == "1") {
+				//sortByLastName(students);
+				std::cout << "One" <<std::endl;
+			} else if (choice == "2") {
+				//sortByFirstName(students);
+				std::cout << "Two" <<std::endl;
+			} else if (choice == "3") {
+				//sortByCreditHours(students);
+				std::cout << "Three" <<std::endl;
+			} else {
+				std::cout << "Invalid choice. Please enter 1-3." <<std::endl;
+			} // end if
 		} else {
-			std::cout << "Invalid choice. Please enter 0-3." << std::endl;
+			std::cout << "Invalid choice. Please enter 0-4." << std::endl;
 		} // end if
 	} // end while
 	
@@ -94,8 +109,19 @@ std::string menu() {
 	std::cout << "1) print all student names" << std::endl;
 	std::cout << "2) print all student data" << std::endl;
 	std::cout << "3) find a student" << std::endl;
-	std::cout << "Please choose 0-3: ";
+	std::cout << "4) sort students" << std::endl;
+	std::cout << "Please choose 0-4: ";
 	std::string choice;
 	std::getline(std::cin, choice);
 	return choice;
 } // end menu
+
+std::string sortMenu() {
+	std::cout << "1) sort by last name" << std::endl;
+	std::cout << "2) sort by first name" << std::endl;
+	std::cout << "3) sort by credit hours" << std::endl;
+	std::cout << "Please choose 1-3: ";
+	std::string choice;
+	std::getline(std::cin, choice);
+	return choice;
+} // end sortMenu
