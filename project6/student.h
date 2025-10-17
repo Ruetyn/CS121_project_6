@@ -7,17 +7,15 @@
 
 class Student {
         protected:
-                std::string studentString;
 		std::string firstName;
 		std::string lastName;
-		Address* address;
-		Date* dob;
-		Date* expectedGrad;
+		Address address;
+		Date birthDate;
+		Date gradDate;
 		int creditHours;
 
         public:
                 Student();
-		~Student();
                 void init(std::string studentString);
                 void printStudent();
 		std::string getLastName();

@@ -1,37 +1,48 @@
 #include "student.h"
-#include "address.h"
-#include "date.h"
 #include <iostream>
 #include <sstream>
 
 Student::Student() {
-	studentString;
-	firstName;
-	lastName;
-	address = new Address;
-	dob = new Date;
-	expectedGrad = new Date;
-	creditHours;
+	firstName = "";
+	lastName = "";
+	creditHours = 0;
 } // end student
 
-Student::~Student() {} // end ~Student
-
 void Student::init(std::string studentString) {
-	this->studentString = studentString;
-	char sep;
-        std::istringstream ss(studentString);
-        ss >> firstName >> sep >> lastName >> sep >> address >> sep >> dob >> sep >> expectedGrad >> sep >> creditHours;
+	std::stringstream ss(studentString);
+	std::string street, city, state, zip;
+	std::string birthStr, gradStr;
+	std::string creditStr;
+
+	std::getline(ss, firstName, ',');
+	std::getline(ss, lastName, ',');
+	std::getline(ss, street, ',');
+	std::getline(ss, city, ',');
+	std::getline(ss, state, ',');
+	std::getline(ss, zip, ',');
+	std::getline(ss, birthStr, ',');
+	std::getline(ss, gradStr, ',');
+	std::getline(ss, creditStr, ',');
+
+	address.init(street, city, state, zip);
+	birthDate.init(birthStr);
+	gradDate.init(gradStr);
+	creditHours = std::stoi(creditStr);
 } // end init
 
 void Student::printStudent() {
 	std::cout << firstName << " " << lastName << std::endl;
-	address->printAddress();
+	address.printAddress();
 	std::cout << "DOB: ";
-	dob->printDate();
+	birthDate.printDate();
 	std::cout << "Grad Date: ";
-	expectedGrad->printDate();
+	gradDate.printDate();
 	std::cout << "Credit Hours: " << creditHours << std::endl;
 } // end printStudent
+
+std::string Student::getLastFirst() {
+	return lastName + ", " + firstName;
+} // end getLastFirst
 
 std::string Student::getLastName() {
 	return lastName;
@@ -40,12 +51,6 @@ std::string Student::getLastName() {
 std::string Student::getFirstName() {
 	return firstName;
 } // end getFirstName
-
-std::string Student::getLastFirst() {
-	std::ostringstream ss;
-	ss << lastName << ", " << firstName;
-	return ss.str();
-} // end getLastFirst
 
 int Student::getCreditHours() {
 	return creditHours;
