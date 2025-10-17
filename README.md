@@ -45,39 +45,43 @@ Student o -- Address
 ```
 
 ## loadStudents
-Use ifstream to open the file
-if the file opened properly
-    while not at the end of the file
-        Create a Student instance on the heap by initializing it with the string from the file
-        Append the instance to a vector
-    close the file
+open students.csv file
+while there are lines to read:
+    read one line
+    create a new Student on the heap
+    call init(line) on that Student
+    append pointer to vector
+close file
 
 ## printStudents
+for each student in vector:
+    student->printStudent()
+    print a divider for between students
 
-
-## showStudents
-Open the file
-if the file opened properly
-    while not at the end of the file
-        print out last names and first names of all the students
-    close the file
+## showStudentNames
+for each student in vector:
+    print student->getFirstLast()
     
 ## findStudents
-
+prompt user for last name search term
+for each student in vector:
+    if student's last name contains search term:
+        student->printStudent()
+        print divider
+    else if no matches found:
+        print no matches found
 
 ## delStudents
-
+for each student in vector:
+    delete student
+clear the vector
 
 ## menu()
-While the user wants to keep going
-    Print out a menu that presents the user with choices of what they want to do
-    Ask the user for what they want to do
-    if the user inputs 0
-        they don't want to keep going terminate the loop
-    elif the user inputs 1
-        calls showStudents so only first and last name are printed
-    elif the user inputs 2
-        calls printStudents so all the student data is printed
-    else
+print 0) quit
+print 1) print all student names
+print 2) print all student data
+print 3) find a student
+prompt the user for what they want to do
+return choice string
         ask the user for the last name of the student they are searching for
         go through the student vector and find students that last name are either the input or contain the input
