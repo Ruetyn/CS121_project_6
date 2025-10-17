@@ -41,7 +41,7 @@ void Student::printStudent() {
 } // end printStudent
 
 std::string Student::getLastFirst() {
-	return lastName + ", " + firstName;
+	return lastName + ", " + firstName + ", " + std::to_string(creditHours);
 } // end getLastFirst
 
 std::string Student::getLastName() {

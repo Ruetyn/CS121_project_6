@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "student.h"
 
 void loadStudents(std::vector<Student*>& students);
@@ -11,6 +12,7 @@ void findStudent(const std::vector<Student*>& students);
 void deleteStudents(std::vector<Student*>& students);
 std::string menu();
 std::string sortMenu();
+void sortStudents(std::vector<Student*>& students, const std::string& sortChoice);
 
 int main(){
 	std::vector<Student*> students;
@@ -29,19 +31,8 @@ int main(){
 		} else if (choice == "3") {
 			findStudent(students);
 		} else if (choice == "4") {
-			choice = sortMenu();
-			if (choice == "1") {
-				//sortByLastName(students);
-				std::cout << "One" <<std::endl;
-			} else if (choice == "2") {
-				//sortByFirstName(students);
-				std::cout << "Two" <<std::endl;
-			} else if (choice == "3") {
-				//sortByCreditHours(students);
-				std::cout << "Three" <<std::endl;
-			} else {
-				std::cout << "Invalid choice. Please enter 1-3." <<std::endl;
-			} // end if
+			std::string sortChoice = sortMenu();
+			sortStudents(students, sortChoice);
 		} else {
 			std::cout << "Invalid choice. Please enter 0-4." << std::endl;
 		} // end if
@@ -125,3 +116,30 @@ std::string sortMenu() {
 	std::getline(std::cin, choice);
 	return choice;
 } // end sortMenu
+
+void sortStudents(std::vector<Student*>& students, const std::string& sortChoice) {
+	if (sortChoice == "1") {
+		std::sort(students.begin(), students.end(),
+				[](Student* a, Student* b) {
+					return a->getLastName() < b->getLastName();
+				});
+		std::cout << "Sorted by last name." << std::endl;
+	}
+	else if  (sortChoice == "2") {
+                std::sort(students.begin(), students.end(),
+                                [](Student* a, Student* b) {
+                                        return a->getFirstName() < b->getFirstName();
+                                });
+                std::cout << "Sorted by first name." << std::endl;
+	}
+	else if (sortChoice == "3") {
+                std::sort(students.begin(), students.end(),
+                                [](Student* a, Student* b) {
+                                        return a->getCreditHours() > b->getCreditHours();
+                                });
+                std::cout << "Sorted by credit hours." << std::endl;
+	}
+	else {
+		std::cout << "Invalid sort option." << std::endl;
+	} // end if
+} // end sortStudents
